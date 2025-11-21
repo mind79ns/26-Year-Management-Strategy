@@ -179,7 +179,7 @@ def create_executive_summary(prs):
 
     # 4대 전략 요약 (아이콘 + 텍스트)
     strategies = [
-        {"icon": "⏱️", "name": "순간유실 Zero", "target": "5% → 2%", "x": 0.5, "y": 4.6},
+        {"icon": "📊", "name": "MES 자동분석", "target": "ROI 3,159%", "x": 0.5, "y": 4.6},
         {"icon": "🎯", "name": "불량재발 Zero", "target": "10% → 5%", "x": 2.7, "y": 4.6},
         {"icon": "📈", "name": "설비CAPA 증대", "target": "15% 향상", "x": 4.9, "y": 4.6},
         {"icon": "🔧", "name": "설비관리 혁신", "target": "고장 50% ↓", "x": 7.1, "y": 4.6}
@@ -362,9 +362,9 @@ def create_strategy_overview(prs):
     # 4개 전략 박스 (사방 배치)
     strategies = [
         {
-            "name": "순간유실\nZero",
-            "goal": "5% → 2%",
-            "icon": "⏱️",
+            "name": "MES\n자동분석",
+            "goal": "ROI 3,159%",
+            "icon": "📊",
             "color": LIGHT_BLUE,
             "angle": 45,  # 오른쪽 위
             "x": 7.2, "y": 1.5
@@ -445,7 +445,7 @@ def create_strategy_overview(prs):
         line.line.width = Pt(3)
 
 def create_strategy1(prs):
-    """페이지 5: 전략1 - 순간유실 Zero"""
+    """페이지 5: 전략1 - MES 데이터 자동분석 & 가시화 시스템"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
     # 제목
@@ -453,100 +453,140 @@ def create_strategy1(prs):
         Inches(0.5), Inches(0.3), Inches(9), Inches(0.6)
     )
     tf = title_box.text_frame
-    tf.text = "전략 1: 순간유실 Zero 프로젝트"
-    tf.paragraphs[0].font.size = Pt(28)
+    tf.text = "전략 1: MES 데이터 자동분석 & 현장 가시화 시스템"
+    tf.paragraphs[0].font.size = Pt(26)
     tf.paragraphs[0].font.bold = True
     tf.paragraphs[0].font.color.rgb = LIGHT_BLUE
 
-    # 좌측: 목표 및 과거 대비
-    left_box = slide.shapes.add_shape(
+    # 좌측 상단: 핵심 원칙
+    principle_box = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
-        Inches(0.5), Inches(1.2), Inches(4.3), Inches(2.5)
+        Inches(0.5), Inches(1.2), Inches(4.3), Inches(1.2)
     )
-    left_box.fill.solid()
-    left_box.fill.fore_color.rgb = RGBColor(240, 248, 255)
-    left_box.line.color.rgb = LIGHT_BLUE
-    left_box.line.width = Pt(2)
+    principle_box.fill.solid()
+    principle_box.fill.fore_color.rgb = RGBColor(255, 250, 205)
+    principle_box.line.color.rgb = GOLD
+    principle_box.line.width = Pt(3)
+    add_shadow(principle_box)
 
-    lt = left_box.text_frame
-    lt.text = "📊 목표 및 과거 대비"
-    lt.paragraphs[0].font.size = Pt(18)
-    lt.paragraphs[0].font.bold = True
-    lt.paragraphs[0].font.color.rgb = LIGHT_BLUE
-    lt.paragraphs[0].alignment = PP_ALIGN.CENTER
+    pt = principle_box.text_frame
+    pt.text = "💡 핵심 원칙"
+    pt.paragraphs[0].font.size = Pt(18)
+    pt.paragraphs[0].font.bold = True
+    pt.paragraphs[0].font.color.rgb = GOLD
+    pt.paragraphs[0].alignment = PP_ALIGN.CENTER
 
-    items = [
-        ("현재 유실시간", "5%"),
-        ("2026 목표", "2% (60% 감소)"),
-        ("과거 5년", "월 단위 분석"),
-        ("2026 혁신", "실시간 (초 단위)"),
-        ("대응 속도", "1000배 향상")
+    p2 = pt.add_paragraph()
+    p2.text = "\n작업자 부담 ZERO"
+    p2.font.size = Pt(22)
+    p2.font.bold = True
+    p2.font.color.rgb = RED
+    p2.alignment = PP_ALIGN.CENTER
+
+    p3 = pt.add_paragraph()
+    p3.text = "기존 MES 유실 등록만 활용"
+    p3.font.size = Pt(12)
+    p3.font.color.rgb = NAVY
+    p3.alignment = PP_ALIGN.CENTER
+    p3.space_before = Pt(5)
+
+    # 좌측 하단: 시스템 구조
+    system_box = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        Inches(0.5), Inches(2.6), Inches(4.3), Inches(1.6)
+    )
+    system_box.fill.solid()
+    system_box.fill.fore_color.rgb = RGBColor(240, 248, 255)
+    system_box.line.color.rgb = LIGHT_BLUE
+    system_box.line.width = Pt(2)
+
+    st = system_box.text_frame
+    st.text = "🔄 시스템 구조"
+    st.paragraphs[0].font.size = Pt(16)
+    st.paragraphs[0].font.bold = True
+    st.paragraphs[0].font.color.rgb = LIGHT_BLUE
+    st.paragraphs[0].alignment = PP_ALIGN.CENTER
+
+    flows = [
+        "① MES 유실 등록 (기존 운영)",
+        "② 5분마다 자동 수집",
+        "③ 로컬 서버 자동 분석",
+        "④ 현장 대형 TV 실시간 표시"
     ]
 
-    for label, value in items:
-        p = lt.add_paragraph()
-        p.text = f"{label}: {value}"
-        p.font.size = Pt(13)
+    for flow in flows:
+        p = st.add_paragraph()
+        p.text = flow
+        p.font.size = Pt(12)
         p.font.color.rgb = NAVY
-        p.space_before = Pt(8)
+        p.space_before = Pt(6)
 
-    # 우측: 세부 과제 (진행률)
-    tasks = [
-        {"name": "실시간 모니터링 시스템", "progress": 45},
-        {"name": "AI 순간정지 자동 감지", "progress": 35},
-        {"name": "MES 연동 데이터 수집", "progress": 55},
-        {"name": "유실 원인 자동 분석", "progress": 30}
+    # 우측: 세부 기능
+    features = [
+        {"name": "MES 데이터 자동 수집", "icon": "📥"},
+        {"name": "LINE별 유실시간 분석", "icon": "📊"},
+        {"name": "원인별 통계 및 트렌드", "icon": "📈"},
+        {"name": "현장 대형 화면 표시", "icon": "🖥️"}
     ]
 
     start_y = 1.2
-    for i, task in enumerate(tasks):
-        y = start_y + i * 0.9
+    for i, feature in enumerate(features):
+        y = start_y + i * 0.8
 
-        # 과제명
-        name_box = slide.shapes.add_textbox(
-            Inches(5.2), Inches(y), Inches(4.3), Inches(0.35)
-        )
-        nt = name_box.text_frame
-        nt.text = f"• {task['name']}"
-        nt.paragraphs[0].font.size = Pt(12)
-        nt.paragraphs[0].font.bold = True
-        nt.paragraphs[0].font.color.rgb = NAVY
-        nt.vertical_anchor = MSO_ANCHOR.MIDDLE
-
-        # 프로그레스바 배경
-        bg = slide.shapes.add_shape(
+        # 기능 박스
+        feat_box = slide.shapes.add_shape(
             MSO_SHAPE.ROUNDED_RECTANGLE,
-            Inches(5.2), Inches(y + 0.4), Inches(3.5), Inches(0.3)
+            Inches(5.2), Inches(y), Inches(4.3), Inches(0.65)
         )
-        bg.fill.solid()
-        bg.fill.fore_color.rgb = LIGHT_GRAY
-        bg.line.fill.background()
+        feat_box.fill.solid()
+        feat_box.fill.fore_color.rgb = WHITE
+        feat_box.line.color.rgb = LIGHT_BLUE
+        feat_box.line.width = Pt(2)
 
-        # 프로그레스바
-        prog_width = 3.5 * (task['progress'] / 100)
-        prog = slide.shapes.add_shape(
-            MSO_SHAPE.ROUNDED_RECTANGLE,
-            Inches(5.2), Inches(y + 0.4), Inches(prog_width), Inches(0.3)
-        )
-        prog.fill.solid()
-        prog.fill.fore_color.rgb = LIGHT_BLUE
-        prog.line.fill.background()
+        ft = feat_box.text_frame
+        ft.text = f"{feature['icon']} {feature['name']}"
+        ft.paragraphs[0].font.size = Pt(14)
+        ft.paragraphs[0].font.bold = True
+        ft.paragraphs[0].font.color.rgb = NAVY
+        ft.vertical_anchor = MSO_ANCHOR.MIDDLE
 
-        # 퍼센트
-        pct_box = slide.shapes.add_textbox(
-            Inches(8.9), Inches(y + 0.35), Inches(0.6), Inches(0.4)
-        )
-        pt = pct_box.text_frame
-        pt.text = f"{task['progress']}%"
-        pt.paragraphs[0].font.size = Pt(11)
-        pt.paragraphs[0].font.bold = True
-        pt.paragraphs[0].font.color.rgb = LIGHT_BLUE
-        pt.vertical_anchor = MSO_ANCHOR.MIDDLE
+    # 하단 좌측: ROI 정보
+    roi_box = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        Inches(0.5), Inches(4.5), Inches(4.3), Inches(2.2)
+    )
+    roi_box.fill.solid()
+    roi_box.fill.fore_color.rgb = RGBColor(240, 255, 240)
+    roi_box.line.color.rgb = GREEN
+    roi_box.line.width = Pt(3)
+    add_shadow(roi_box)
 
-    # 하단: 기대효과
+    rt = roi_box.text_frame
+    rt.text = "💰 경제성 분석"
+    rt.paragraphs[0].font.size = Pt(18)
+    rt.paragraphs[0].font.bold = True
+    rt.paragraphs[0].font.color.rgb = GREEN
+    rt.paragraphs[0].alignment = PP_ALIGN.CENTER
+
+    roi_items = [
+        ("투자 비용", "280만원", NAVY),
+        ("ROI", "3,159%", GREEN),
+        ("회수 기간", "11일", ORANGE),
+        ("연간 효과", "8,845만원", PURPLE)
+    ]
+
+    for label, value, color in roi_items:
+        p = rt.add_paragraph()
+        p.text = f"\n{label}: {value}"
+        p.font.size = Pt(14)
+        p.font.bold = True
+        p.font.color.rgb = color
+        p.alignment = PP_ALIGN.CENTER
+
+    # 하단 우측: 기대효과
     effect_box = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE,
-        Inches(0.5), Inches(4.2), Inches(9), Inches(2.5)
+        Inches(5.2), Inches(4.5), Inches(4.3), Inches(2.2)
     )
     effect_box.fill.solid()
     effect_box.fill.fore_color.rgb = RGBColor(245, 250, 255)
@@ -555,36 +595,26 @@ def create_strategy1(prs):
 
     et = effect_box.text_frame
     et.text = "🎯 기대효과"
-    et.paragraphs[0].font.size = Pt(20)
+    et.paragraphs[0].font.size = Pt(18)
     et.paragraphs[0].font.bold = True
     et.paragraphs[0].font.color.rgb = LIGHT_BLUE
     et.paragraphs[0].alignment = PP_ALIGN.CENTER
 
     effects = [
-        ("유실시간 60% 감소", "5% → 2%", LIGHT_BLUE),
-        ("대응속도 1000배 향상", "월 단위 → 초 단위", GREEN),
-        ("생산성 5% 증가", "CAPA 효율 극대화", ORANGE),
-        ("가공비 3% 절감", "연간 수억원 절감", PURPLE)
+        "✓ 유실 원인 즉시 파악",
+        "✓ LINE별 실시간 가시화",
+        "✓ 데이터 기반 의사결정",
+        "✓ 유실시간 20% 감소",
+        "✓ 생산성 5% 향상",
+        "✓ 관리자 업무 효율 50% ↑"
     ]
 
-    eff_y = 4.8
-    for i, (title, detail, color) in enumerate(effects):
-        x = 0.8 + (i % 2) * 4.7
-        y = eff_y + (i // 2) * 0.9
-
-        eb = slide.shapes.add_textbox(
-            Inches(x), Inches(y), Inches(4.2), Inches(0.7)
-        )
-        ebt = eb.text_frame
-        ebt.text = f"✓ {title}"
-        ebt.paragraphs[0].font.size = Pt(15)
-        ebt.paragraphs[0].font.bold = True
-        ebt.paragraphs[0].font.color.rgb = color
-
-        p2 = ebt.add_paragraph()
-        p2.text = f"   → {detail}"
-        p2.font.size = Pt(12)
-        p2.font.color.rgb = DARK_GRAY
+    for eff in effects:
+        p = et.add_paragraph()
+        p.text = eff
+        p.font.size = Pt(13)
+        p.font.color.rgb = NAVY
+        p.space_before = Pt(6)
 
 def create_conclusion(prs):
     """페이지 12: 결론"""

@@ -433,7 +433,7 @@ def create_efficiency_targets(prs):
     st.paragraphs[0].alignment = PP_ALIGN.CENTER
 
     p2 = st.add_paragraph()
-    p2.text = "\n순간유실 Zero + 불량재발 Zero + 설비CAPA 증대 + 설비관리 혁신"
+    p2.text = "\nMES 자동분석 + 불량재발 Zero + 설비CAPA 증대 + 설비관리 혁신"
     p2.font.size = Pt(16)
     p2.font.bold = True
     p2.font.color.rgb = NAVY
@@ -487,7 +487,7 @@ def create_roadmap(prs):
 
     # 과제별 간트 바
     tasks = [
-        {"name": "순간유실 Zero", "color": LIGHT_BLUE, "quarters": [1, 1, 1, 1]},
+        {"name": "MES 자동분석 시스템", "color": LIGHT_BLUE, "quarters": [1, 1, 1, 1]},
         {"name": "불량 재발 Zero", "color": GREEN, "quarters": [1, 1, 1, 0]},
         {"name": "설비 CAPA 증대", "color": ORANGE, "quarters": [0, 1, 1, 1]},
         {"name": "설비관리 혁신", "color": PURPLE, "quarters": [1, 1, 0, 0]}
@@ -646,7 +646,7 @@ def create_expected_results(prs):
     mt.paragraphs[0].alignment = PP_ALIGN.CENTER
 
     details = [
-        ("순간유실시간", "5% → 2% (60% 감소)", LIGHT_BLUE),
+        ("MES 자동분석", "ROI 3,159%, 회수기간 11일", LIGHT_BLUE),
         ("불량률", "10% → 5% (50% 개선)", GREEN),
         ("설비 가동률", "75% → 90% (15%p 향상)", ORANGE),
         ("평가가동 효율", "SMD 91%, RADIAL 85%, AXIAL 85%", PURPLE),
@@ -696,7 +696,7 @@ def main():
     print("✓ 페이지 4: 2026 전략 개요")
 
     create_strategy1(prs)
-    print("✓ 페이지 5: 전략1 - 순간유실 Zero")
+    print("✓ 페이지 5: 전략1 - MES 자동분석 시스템")
 
     # Part 2 새 함수들
     create_strategy2(prs)
